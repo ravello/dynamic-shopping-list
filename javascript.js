@@ -1,0 +1,42 @@
+const userInput = document.querySelector("#userInput");
+const btn = document.querySelector("#btn");
+const theList = document.querySelector("#theList");
+
+function addNewItem() {
+    // create elements
+    const newItem = document.createElement("li");
+    const newButton = document.createElement("button");
+
+    // edit elements
+    newItem.textContent = userInput.value + " ";
+    newButton.textContent = "Delete";
+    newButton.setAttribute("class", "delete-btn");
+
+    // append elements
+    newItem.appendChild(newButton);
+    theList.appendChild(newItem);
+
+    // clear the input field
+    userInput.value = "";
+    return;
+}
+
+btn.addEventListener("click", addNewItem);
+userInput.addEventListener("keydown", (e) => {
+    if (e.key === 'Enter') {
+        // Prevent the default action of enter (new line)
+        e.preventDefault();
+        addNewItem();
+    }
+});
+
+// instead of adding an event listener to every button,
+// we add an event listener to the <ul> itself
+theList.addEventListener("click", (e) => {
+    // check if the clicked element belongs to the delete button class
+    if (e.target.classList.contains("delete-btn")) {
+        // if so, reach the parent <li> and remove it
+        const listItemToRemove = e.target.parentElement;
+        listItemToRemove.remove();
+    }
+});
