@@ -18,6 +18,7 @@ function addNewItem() {
 
     // clear the input field
     userInput.value = "";
+    userInput.focus();
     return;
 }
 
